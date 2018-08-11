@@ -4,6 +4,7 @@ from gym.utils import seeding
 from graphics import *
 import numpy as np
 
+
 class MazeEnv1(gym.Env):
     def __init__(self):
         self.vertical_0 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -24,7 +25,7 @@ class MazeEnv1(gym.Env):
         self.vertical_15 = [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0]
         self.vertical_16 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         self.vertical_wall = [self.vertical_0, self.vertical_1, self.vertical_2, self.vertical_3, self.vertical_4,
-                              self.vertical_5, self.vertical_6, self.vertical_7,self.vertical_8, self.vertical_9,
+                              self.vertical_5, self.vertical_6, self.vertical_7, self.vertical_8, self.vertical_9,
                               self.vertical_10, self.vertical_11, self.vertical_12, self.vertical_13, self.vertical_14,
                               self.vertical_15, self.vertical_16]
 
@@ -46,7 +47,7 @@ class MazeEnv1(gym.Env):
         self.horizontal_15 = [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]
         self.horizontal_16 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         self.horizontal_wall = [self.horizontal_0, self.horizontal_1, self.horizontal_2, self.horizontal_3,
-                                self.horizontal_4, self.horizontal_5,self.horizontal_6, self.horizontal_7,
+                                self.horizontal_4, self.horizontal_5, self.horizontal_6, self.horizontal_7,
                                 self.horizontal_8, self.horizontal_9, self.horizontal_10, self.horizontal_11,
                                 self.horizontal_12, self.horizontal_13, self.horizontal_14, self.horizontal_15,
                                 self.horizontal_16]
@@ -66,17 +67,16 @@ class MazeEnv1(gym.Env):
         self.right_wall = self.vertical_wall[self.virtual_x + 1][self.virtual_y]
         self.left_wall = self.vertical_wall[self.virtual_x][self.virtual_y]
 
-
         self.action_space = spaces.Discrete(4)  # if action==0, up; 1, down; 2, left; 3, right
         self.observation_space = spaces.Box(low=0, high=15, shape=(2,))  # not sure what to put as observation, yet
 
         self.step_count = 0
-        #self.step_max = 1000
-        self.observation = np.array([0, 15])  # not sure if this is right(observe four walls: U, R, B, L))(virtual coords)
+        # self.step_max = 1000
+        self.observation = np.array(
+            [0, 15])  # not sure if this is right(observe four walls: U, R, B, L))(virtual coords)
 
         self.seed()
         self.reset()
-
 
     def seed(self, seed=None):
         self.nu_random, seed = seeding.np_random(seed)
@@ -133,18 +133,18 @@ class MazeEnv1(gym.Env):
         self.step_count += 1
         '''if self.step_count > self.step_max:
             done = True'''
-            
+
         print(self.step_count)
 
         return self.observation, reward, done
 
     def draw_map(self):
-        '''mouseMap = GraphWin("2017 high school maze", 1000, 700)  # create window\canvas
+        """mouseMap = GraphWin("2017 high school maze", 1000, 700)  # create window\canvas
         mouseMap.setBackground(color_rgb(50, 50, 50))
         bot = Circle(Point(30, 630), 15)  # create bot
         bot.setOutline(color_rgb(255, 255, 255))
         bot.setWidth(3)
-        bot.draw(mouseMap)'''
+        bot.draw(mouseMap)"""
 
         for j in range(17):
             for i in range(16):
@@ -161,7 +161,7 @@ class MazeEnv1(gym.Env):
                     line.setWidth(3)
                     line.setOutline(color_rgb(255, 255, 0))
                     line.draw(self.mouseMap)
-                    
+
     def close_map(self):
         self.mouseMap.close()
 
@@ -179,5 +179,6 @@ class MazeEnv1(gym.Env):
         self.bot.setOutline(color_rgb(255, 255, 255))
         self.bot.setWidth(3)
         self.bot.draw(self.mouseMap)
-        
-return self.observation # don't know why
+
+
+        return self.observation # don't know why
